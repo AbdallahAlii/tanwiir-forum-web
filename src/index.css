@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Background #F8F9FA */
+    --background: 210 20% 98%;
+    /* Text Color #333333 */
+    --foreground: 0 0% 20%;
+
+    /* Secondary Background #E9ECEF */
+    --card: 210 16% 93%;
+    --card-foreground: 0 0% 20%;
+
+    --popover: 210 16% 93%;
+    --popover-foreground: 0 0% 20%;
+
+    /* Primary Color #3b9bd5 */
+    --primary: 203 66% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary / outline #f8f9fa */
+    --secondary: 210 20% 98%;
+    --secondary-foreground: 214 82% 51%;
+
+    --muted: 210 16% 93%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Accent Color #1a73e8 */
+    --accent: 214 82% 51%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 203 66% 53%;
+
+    --radius: 0.75rem;
+
+    /* Re-map legacy values to the new light blue palette so old components don't break until rewritten */
+    --gold: 203 66% 53%;
+    --gold-light: 203 50% 65%;
+    --gold-dark: 206 64% 44%;
+    --navy: 210 16% 93%;
+    --navy-light: 210 20% 98%;
+    --navy-mid: 210 10% 90%;
+
+    --sidebar-background: 210 20% 98%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 203 66% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 16% 93%;
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 203 66% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased leading-relaxed;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold text-foreground;
+  }
+}
+
+@layer components {
+  /* Updated to Light Secondary Background styling */
+  .glass-card {
+    @apply bg-card border border-border/50 rounded-2xl shadow-sm;
+  }
+  .gold-gradient {
+    @apply bg-primary text-primary-foreground;
+  }
+  .gold-text {
+    @apply text-primary;
+  }
+  .navy-gradient {
+    @apply bg-card;
+  }
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24;
+  }
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
