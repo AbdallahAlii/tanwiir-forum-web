@@ -1,3 +1,4 @@
+import BlogDetail from "@/pages/Blogdetail";
 import { lazy } from "react";
 
 const Index = lazy(() => import("@/pages/Index"));
@@ -25,6 +26,7 @@ export const routes: RouteConfig[] = [
   { path: "/community", element: <Community />, layout: "main" },
   { path: "/resources", element: <Resources />, layout: "main" },
   { path: "/blog", element: <Blog />, layout: "main" },
+  { path: "/blog/:slug", element: <BlogDetail />, layout: "main" },
   { path: "/events", element: <Events />, layout: "main" },
   { path: "/contact", element: <Contact />, layout: "main" },
   { path: "*", element: <NotFound />, layout: "blank" },
