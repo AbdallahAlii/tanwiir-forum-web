@@ -8,6 +8,9 @@
 //   const [isOpen, setIsOpen] = useState(false);
 //   const [isScrolled, setIsScrolled] = useState(false);
 //   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+//   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(
+//     null,
+//   );
 
 //   useEffect(() => {
 //     const handleScroll = () => setIsScrolled(window.scrollY > 30);
@@ -26,6 +29,10 @@
 //       { name: "Members", path: "/community" },
 //       { name: "Contact", path: "/contact" },
 //     ],
+//   };
+
+//   const toggleMobileDropdown = (dropdown: string) => {
+//     setMobileOpenDropdown(mobileOpenDropdown === dropdown ? null : dropdown);
 //   };
 
 //   return (
@@ -56,7 +63,7 @@
 //           </span>
 //         </Link>
 
-//         {/* Desktop Nav - Full Links Restored */}
+//         {/* Desktop Nav */}
 //         <div className="hidden lg:flex items-center gap-2">
 //           <Link
 //             to="/about"
@@ -71,7 +78,7 @@
 //             Services
 //           </Link>
 
-//           {/* Resources Dropdown */}
+//           {/* Resources Dropdown - Desktop */}
 //           <div
 //             className="relative"
 //             onMouseEnter={() => setActiveDropdown("resources")}
@@ -109,7 +116,7 @@
 //             </AnimatePresence>
 //           </div>
 
-//           {/* Community Dropdown */}
+//           {/* Community Dropdown - Desktop */}
 //           <div
 //             className="relative"
 //             onMouseEnter={() => setActiveDropdown("community")}
@@ -148,7 +155,7 @@
 //           </div>
 //         </div>
 
-//         {/* CTA */}
+//         {/* Desktop CTA */}
 //         <div className="hidden lg:block">
 //           <Link
 //             to="/contact"
@@ -158,7 +165,7 @@
 //           </Link>
 //         </div>
 
-//         {/* Mobile Toggle */}
+//         {/* Mobile Toggle Button */}
 //         <button
 //           onClick={() => setIsOpen(!isOpen)}
 //           className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
@@ -167,32 +174,130 @@
 //         </button>
 //       </div>
 
-//       {/* Mobile Nav Restored */}
+//       {/* Mobile Nav - With Working Dropdowns for Resources and Community */}
 //       <AnimatePresence>
 //         {isOpen && (
 //           <motion.div
 //             initial={{ opacity: 0, height: 0 }}
 //             animate={{ opacity: 1, height: "auto" }}
 //             exit={{ opacity: 0, height: 0 }}
-//             className="lg:hidden bg-white/90 backdrop-blur-2xl border-t border-slate-100 mt-2 mx-4 rounded-2xl shadow-2xl overflow-hidden"
+//             className="lg:hidden bg-white/95 backdrop-blur-2xl border-t border-slate-100 mt-2 mx-4 rounded-2xl shadow-2xl overflow-hidden"
 //           >
 //             <div className="p-4 space-y-1">
-//               {["Home", "About", "Services", "Resources", "Community"].map(
-//                 (link) => (
-//                   <Link
-//                     key={link}
-//                     to={link === "Home" ? "/" : `/${link.toLowerCase()}`}
-//                     onClick={() => setIsOpen(false)}
-//                     className="block p-3 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors"
-//                   >
-//                     {link}
-//                   </Link>
-//                 ),
-//               )}
+//               {/* Home Link */}
+//               <Link
+//                 to="/"
+//                 onClick={() => setIsOpen(false)}
+//                 className="block p-3 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors"
+//               >
+//                 Home
+//               </Link>
+
+//               {/* About Link */}
+//               <Link
+//                 to="/about"
+//                 onClick={() => setIsOpen(false)}
+//                 className="block p-3 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors"
+//               >
+//                 About
+//               </Link>
+
+//               {/* Services Link */}
+//               <Link
+//                 to="/services"
+//                 onClick={() => setIsOpen(false)}
+//                 className="block p-3 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors"
+//               >
+//                 Services
+//               </Link>
+
+//               {/* Resources Dropdown - Mobile */}
+//               <div className="space-y-1">
+//                 <button
+//                   onClick={() => toggleMobileDropdown("resources")}
+//                   className="w-full flex items-center justify-between p-3 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors"
+//                 >
+//                   Resources
+//                   <ChevronDown
+//                     size={16}
+//                     className={cn(
+//                       "transition-transform duration-300",
+//                       mobileOpenDropdown === "resources" && "rotate-180",
+//                     )}
+//                   />
+//                 </button>
+//                 <AnimatePresence>
+//                   {mobileOpenDropdown === "resources" && (
+//                     <motion.div
+//                       initial={{ opacity: 0, height: 0 }}
+//                       animate={{ opacity: 1, height: "auto" }}
+//                       exit={{ opacity: 0, height: 0 }}
+//                       className="pl-4 space-y-1 overflow-hidden"
+//                     >
+//                       {menuItems.resources.map((item) => (
+//                         <Link
+//                           key={item.name}
+//                           to={item.path}
+//                           onClick={() => {
+//                             setIsOpen(false);
+//                             setMobileOpenDropdown(null);
+//                           }}
+//                           className="block p-3 rounded-xl text-slate-500 text-sm hover:bg-slate-50 hover:text-cyan-600 transition-colors"
+//                         >
+//                           {item.name}
+//                         </Link>
+//                       ))}
+//                     </motion.div>
+//                   )}
+//                 </AnimatePresence>
+//               </div>
+
+//               {/* Community Dropdown - Mobile */}
+//               <div className="space-y-1">
+//                 <button
+//                   onClick={() => toggleMobileDropdown("community")}
+//                   className="w-full flex items-center justify-between p-3 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors"
+//                 >
+//                   Community
+//                   <ChevronDown
+//                     size={16}
+//                     className={cn(
+//                       "transition-transform duration-300",
+//                       mobileOpenDropdown === "community" && "rotate-180",
+//                     )}
+//                   />
+//                 </button>
+//                 <AnimatePresence>
+//                   {mobileOpenDropdown === "community" && (
+//                     <motion.div
+//                       initial={{ opacity: 0, height: 0 }}
+//                       animate={{ opacity: 1, height: "auto" }}
+//                       exit={{ opacity: 0, height: 0 }}
+//                       className="pl-4 space-y-1 overflow-hidden"
+//                     >
+//                       {menuItems.community.map((item) => (
+//                         <Link
+//                           key={item.name}
+//                           to={item.path}
+//                           onClick={() => {
+//                             setIsOpen(false);
+//                             setMobileOpenDropdown(null);
+//                           }}
+//                           className="block p-3 rounded-xl text-slate-500 text-sm hover:bg-slate-50 hover:text-cyan-600 transition-colors"
+//                         >
+//                           {item.name}
+//                         </Link>
+//                       ))}
+//                     </motion.div>
+//                   )}
+//                 </AnimatePresence>
+//               </div>
+
+//               {/* Mobile CTA Button */}
 //               <Link
 //                 to="/contact"
 //                 onClick={() => setIsOpen(false)}
-//                 className="block bg-cyan-600 text-white text-center p-4 rounded-xl font-bold mt-4"
+//                 className="block bg-cyan-600 text-white text-center p-4 rounded-xl font-bold mt-4 hover:bg-cyan-700 transition-colors"
 //               >
 //                 Get Started
 //               </Link>
@@ -205,6 +310,8 @@
 // };
 
 // export default Navbar;
+// components/Navbar.tsx
+import logoImg from "@/assets/logo.jpeg"; // Import the logo image
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -257,13 +364,17 @@ const Navbar = () => {
             : "max-w-7xl w-full bg-transparent",
         )}
       >
-        {/* Logo */}
+        {/* Logo with image */}
         <Link to="/" className="flex items-center gap-2 group">
           <motion.div
-            whileHover={{ rotate: 8, scale: 1.05 }}
-            className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg"
+            whileHover={{ rotate: 5, scale: 1.02 }}
+            className="w-10 h-10 rounded-xl overflow-hidden shadow-lg bg-white"
           >
-            <span className="font-bold text-white text-lg">T</span>
+            <img
+              src={logoImg}
+              alt="Tanwiir Forum Logo"
+              className="w-full h-full object-cover"
+            />
           </motion.div>
           <span className="font-display font-bold text-xl text-slate-900">
             Tanwiir<span className="text-cyan-600 tracking-tight"> Forum</span>
@@ -381,7 +492,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Nav - With Working Dropdowns for Resources and Community */}
+      {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -391,7 +502,6 @@ const Navbar = () => {
             className="lg:hidden bg-white/95 backdrop-blur-2xl border-t border-slate-100 mt-2 mx-4 rounded-2xl shadow-2xl overflow-hidden"
           >
             <div className="p-4 space-y-1">
-              {/* Home Link */}
               <Link
                 to="/"
                 onClick={() => setIsOpen(false)}
@@ -399,8 +509,6 @@ const Navbar = () => {
               >
                 Home
               </Link>
-
-              {/* About Link */}
               <Link
                 to="/about"
                 onClick={() => setIsOpen(false)}
@@ -408,8 +516,6 @@ const Navbar = () => {
               >
                 About
               </Link>
-
-              {/* Services Link */}
               <Link
                 to="/services"
                 onClick={() => setIsOpen(false)}
@@ -500,7 +606,6 @@ const Navbar = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Mobile CTA Button */}
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
