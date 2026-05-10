@@ -27,7 +27,7 @@ const Navbar = () => {
       { name: "Library", path: "/resources" },
     ],
     community: [
-      { name: "Forums", path: "/community" },
+      { name: "Join", path: "/join" },
       { name: "Members", path: "/community" },
       { name: "Contact", path: "/contact" },
     ],
